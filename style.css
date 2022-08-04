@@ -1,0 +1,33 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#frame {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100vh;
+    grid-template-areas: "l f r";
+    align-items: center;
+    justify-items: center;
+}
+
+#game {
+    grid-area: f;
+    border: 1px solid black;
+}
+
+#left {
+    grid-area: l;
+}
+
+#icon {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+}
+
+#right {
+    grid-area: r;
+}
