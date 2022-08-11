@@ -1,8 +1,8 @@
 window.log = (ct) => console.log(ct)
 
 import render from './render.js'
-import control from './control.js'
-import Ball from './balls.js'
+import control from './src/control.js'
+import Ball from '/src/balls.js'
 import Phy from './physical.js'
 
 function Game(config) {
@@ -26,13 +26,18 @@ function Game(config) {
             config,
             frame: ctx,
             speed: 1,
+
             ballsN: 1,
             balls: [],
             ballSize: 0,
+
+
             barSize: 0,
             barSize,
             barSpeed,
             bar: barArea,
+
+
             direction: 0
         }
 
@@ -61,6 +66,7 @@ function Game(config) {
     
     return init(config)
 }
+
 
 function run(state) {
 
@@ -109,7 +115,7 @@ function run(state) {
 
         GAME_SPEED+=3
         render(null, state, GAME_SPEED)
-    }, 33.33)
+    }, 1000 / state.config.fps)
 }
 
 // chama função responsavel por criar o game, repasse os parametros necessário
@@ -117,5 +123,5 @@ function run(state) {
 const game = Game({
     boxSize: 500,
     barSpeed: 20,
-    fps: 30
+    fps: 45
 })

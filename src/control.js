@@ -1,5 +1,7 @@
-import render from './render.js'
+import render from '../render.js'
 //import rules from './rules.js'
+
+/* control só pode alterar o elemento Bar */
 
 const control = (state, element, action) => {
 

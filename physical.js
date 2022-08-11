@@ -1,6 +1,6 @@
 function Phy(state, g) {
 
-    let { bar, balls, barSizer, ballSize } = state
+    let { bar, balls, barSize, ballSize } = state
 
     if(
         balls[0].y < 0 - ballSize * 2 && state.direction == 1

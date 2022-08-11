@@ -1,11 +1,21 @@
+let a = 0
+
 function render (pre, state, gs) {
+
+    /*
+    
+    pre = antigo estado
+    gs = game speed
+
+    */
 
     const { frame } = state
 
                 let code = document.querySelector('#right')
                 code.innerHTML = JSON.stringify(state)
 
-    frame.reset()
+    let canvasSize = state.config.boxSize
+    frame.clearRect(0,0,canvasSize, canvasSize)
 
 
     // render bar
