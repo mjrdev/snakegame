@@ -3,9 +3,13 @@ import render from '../render.js'
 
 /* control só pode alterar o elemento Bar */
 
+// fazer a referencia das teclas para com as ações
+
 const control = (state, element, action) => {
 
     let oldState = state
+
+    log(action)
 
     const commands = {
         bar: {
