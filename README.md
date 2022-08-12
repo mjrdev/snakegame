@@ -2,14 +2,34 @@
 
 Esse game está em beta e incompleto, muitos _bugs_ serão encontrados.
 
-#### to run in development mode:
+é necessário ter o node instalado
+
+após clonado:
+
+#### to run in production mode:
 ```
-$ yarn
-$ yarn dev
+$ npm install
+$ npm run start
+
 ```
 or
+
+```
+$ yarn
+$ yarn start
+
+```
+
+#### to run in development mode:
 ```
 $ npm install
 $ npm run dev
-```
 
+```
+or
+
+```
+$ yarn
+$ yarn dev
+
+```
