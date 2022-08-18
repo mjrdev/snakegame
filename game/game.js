@@ -68,7 +68,7 @@ function Game(config) {
 // chama função responsavel por criar o game, repasse os parametros necessário
 // box-size: tamanho do display em pixels
 const game = Game({
-    boxSize: 500,
+    boxSize: 300,
     barSpeed: 20,
     fps: 45
 })

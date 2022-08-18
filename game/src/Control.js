@@ -5,13 +5,14 @@ import render from '../render.js'
 
 // fazer a referencia das teclas para com as ações
 
-const control = (state, element, action) => {
+const control = (state, commands) => {
 
     let oldState = state
+    const { element, action } = commands
 
     log(action)
 
-    const commands = {
+    const options = {
         bar: {
             moveLeft: () => {
                 state.bar.x[0] -= state.barSpeed
@@ -24,7 +25,7 @@ const control = (state, element, action) => {
         }
     }
 
-    let cmd = commands[element]
+    let cmd = options[element]
     cmd[action]()
 
     render(oldState, state)

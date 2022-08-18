@@ -5,7 +5,7 @@
   "author": "mjrdev <jrgomesdev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "browser-sync start --server ./game",
+    "dev": "browser-sync start -w -s ./game",
     "start": "node server",
     "dev:node": "nodemon server.js"
   },
