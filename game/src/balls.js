@@ -1,25 +1,26 @@
+import { state } from '../enginer.js'
 
-function createdBall(state) {
-    
-    const PROP = 0.04
-    let ballSize = PROP * state.config.boxSize
-    let ball = { x: 250, y: 0}
-
-    return {
-        ballSize, ballPos: ball
-    }
+function createdBall() {
+    console.log('criar ball')
 }
 
-function moveBall(state, toMove) {
-    let { balls } = state
+function moveBall() {
 
-    balls[0].y+=toMove
+    const data = state.getState()
+    const ball = data.balls[0]
 
-    if(state.balls[0].y > state.config.boxSize + toMove) {
-        state.balls[0].y = 0 - toMove
+    const config = {
+        balls: [
+            {
+                ballSize: 15,
+                ballPosition: { x: ball.ballPosition.x, y: ball.ballPosition.y + 6 }
+            }
+        ]
     }
 
-    return balls[0]
+    state.update(config)
+
+    return
 }
 
 export default { createdBall, moveBall}

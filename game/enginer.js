@@ -1,73 +1,64 @@
 import render from './render.js'
-import control from './src/Control.js'
-import Ball from '/src/balls.js'
-import Phy from './physical.js'
+import Control from './src/Control.js'
+import Phy from './physical/physical.js'
 import input from './src/input.js'
 
-import State from './src/State.js'
+import State from './package/State.js'
+
+let state = State()
 
 function run(dataState) {
 
-    const state = {
-        data: dataState,
-        observers: []
-    }
+    state = State(dataState)
+
+    /*
+
+    const observers = []
 
     function subscribeObserver(observerFunction) {
 
-        const multObsFunctions = (observes) => {
-            for(obs of observers) {
-                state.observers.push(obs)
+        const multObsFunctions = (observerFunctions) => {
+            for(let obs of observerFunctions) {
+                
+                observers.push(obs)
             }
         }
 
         const singleObsFunction = (observer) => {
-            state.observers.push(observer)
+            observers.push(observer)
         }
 
         Array.isArray(observerFunction) == true ? multObsFunctions(observerFunction) : singleObsFunction(observerFunction) 
     }
 
     function runObservers() {
-        //console.log(`Notifying ${state.observers.length} observers`)
+        //console.log(`Notifying ${observers.length} observers`)
 
-        for(let observerFunction of state.observers) {
-            const data = state.dataState
+        for(let observerFunction of observers) {
             
             observerFunction()
         }
     }
 
-    const observers = input
-
-    subscribeObserver(observers)
-
-
-    //subscribeObserver(input)
+    const observerToRun = []
+    subscribeObserver(observerToRun)
+    */
 
     let GAME_SPEED = 0
     window.GAME_RUN = true
 
-    // movimentação balls AUTO
+    /* movimentação balls AUTO
 
    let ball = Ball.createdBall(state.data)
    state.data.ballSize = ball.ballSize
-   state.data.balls.push(ball.ballPos)
+   state.data.balls.push(ball.ballPos) */
 
     // < ---------------> //
 
     // movimentação da barra MANUAL
-
-    function controlForGame (logKey) {
     
-        State.input(state.dataState, {
-            element: 'bar', action: logKey.key
-        })
-    }
-    
-    document.addEventListener("keydown", () => {
-        control(state.data, { element:'bar', action:'moveLeft'})
-        console.log()
+    document.addEventListener("keydown", (event) => {
+        input('bar', event.key)
     })
 
     function statistics(s) {
@@ -85,14 +76,14 @@ function run(dataState) {
         
 
         // atualização ball
-        let phyMod = Phy(state.data)
+        //let phyMod = Phy(state.data)
 
-        state.data.balls[0] = Ball.moveBall(state.data, phyMod.toMove)
+        //state.data.balls[0] = Ball.moveBall(state.data, phyMod.toMove)
 
         GAME_SPEED+=1
-        render(null, state.data, GAME_SPEED)
-        runObservers()
+        Phy()
+        render(state.data, 0)
     }, 1000 / state.data.config.fps)
 }
 
-export default run
+export { run, state }

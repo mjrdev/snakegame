@@ -5,10 +5,12 @@ html, body {
 }
 
 #frame {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100vh;
-    grid-template-areas: "l f r";
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     align-items: center;
     justify-items: center;
 }
@@ -19,7 +21,7 @@ html, body {
 }
 
 #left {
-    grid-area: l;
+
 }
 
 #icon {
@@ -29,5 +31,5 @@ html, body {
 }
 
 #right {
-    grid-area: r;
+
 }

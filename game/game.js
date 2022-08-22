@@ -1,11 +1,9 @@
 window.log = (ct) => console.log(ct)
 
-
-import Run from './enginer.js'
-
+import { run, state } from './enginer.js'
 function Game(config) {
 
-    const { boxSize, barSpeed } = config
+    const { boxSize, barMove } = config
 
     /*  a função "init" no final do código controla os dados iniciais
         e desenhos a serem feitos antes da partida se iniciar */
@@ -18,39 +16,42 @@ function Game(config) {
     
         const ctx = canvas.getContext('2d')
 
-        let { barSize, barSpeed, barArea } = preRender(ctx)
+        let { barSize, barMove, barArea } = preRender(ctx)
 
-        const state = {
-            config,
-            frame: ctx,
-            speed: 1,
-
+        const stateConfig = {
+            config, frame: ctx,
+            game: {
+                speed: 1
+            },
+            balls: [
+                {   
+                    ballPosition: { x: 20, y: 0 },
+                    ballSize: 20
+                }
+            ],
             ballsN: 1,
-            balls: [],
+            ball: [],
             ballSize: 0,
 
 
-            barSize: 0,
             barSize,
-            barSpeed,
+            barMove,
             bar: barArea,
 
 
             direction: 0
         }
 
-        log('<----- GAME CARREGADO COM SUCESSO! ----->')
-                        /* LOG GAME */
-        return Run(state)
+        run(stateConfig)
     }
 
     // renderização de objetos da tela inicial do game
     function preRender(ctx) {
-        const barSize = [0.18 * boxSize, 0.03 * boxSize]
+        const barSize = [70, 10]
         const barPosInitial = [boxSize / 2 - barSize[0] / 2, boxSize * 0.92]
         const barArea = {
             x: [barPosInitial[0], barPosInitial[0]+barSize[0]],
-            y: [barPosInitial[1], barPosInitial[1]+barSize[1]]
+            y: [boxSize - barSize[1] * 2, boxSize - barSize[1]]
         }
 
         config.barArea = barArea
@@ -59,7 +60,7 @@ function Game(config) {
         ctx.fillStyle = 'black'
         ctx.fillRect(barPosInitial[0], barPosInitial[1], barSize[0], barSize[1])
 
-        return { barSpeed, barSize, barArea }
+        return { barMove, barSize, barArea }
     }
     
     return init(config)
@@ -69,6 +70,6 @@ function Game(config) {
 // box-size: tamanho do display em pixels
 const game = Game({
     boxSize: 300,
-    barSpeed: 20,
+    barMove: 20,
     fps: 45
 })

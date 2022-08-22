@@ -7,9 +7,6 @@ import render from '../render.js'
 
 const control = (state, commands) => {
 
-    let oldState = state
-    const { element, action } = commands
-
     log(action)
 
     const options = {
@@ -28,7 +25,7 @@ const control = (state, commands) => {
     let cmd = options[element]
     cmd[action]()
 
-    render(oldState, state)
+    render(state)
 }
 
 export default control
