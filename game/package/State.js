@@ -8,9 +8,15 @@
 
 */
 
-function gameState(data) {
+import { state } from "../enginer.js"
+import Phy from "../physical/physical.js"
+
+function State(data) {
     return {
         data,
+        init: function() {
+            Phy()
+        },
         getState: function () {
 
             return this.data
@@ -28,4 +34,4 @@ function gameState(data) {
     }
 }
 
-export default gameState
+export default State

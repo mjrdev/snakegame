@@ -1,5 +1,4 @@
 import render from './render.js'
-import Control from './src/Control.js'
 import Phy from './physical/physical.js'
 import input from './src/input.js'
 
@@ -11,49 +10,8 @@ function run(dataState) {
 
     state = State(dataState)
 
-    /*
-
-    const observers = []
-
-    function subscribeObserver(observerFunction) {
-
-        const multObsFunctions = (observerFunctions) => {
-            for(let obs of observerFunctions) {
-                
-                observers.push(obs)
-            }
-        }
-
-        const singleObsFunction = (observer) => {
-            observers.push(observer)
-        }
-
-        Array.isArray(observerFunction) == true ? multObsFunctions(observerFunction) : singleObsFunction(observerFunction) 
-    }
-
-    function runObservers() {
-        //console.log(`Notifying ${observers.length} observers`)
-
-        for(let observerFunction of observers) {
-            
-            observerFunction()
-        }
-    }
-
-    const observerToRun = []
-    subscribeObserver(observerToRun)
-    */
-
     let GAME_SPEED = 0
     window.GAME_RUN = true
-
-    /* movimentação balls AUTO
-
-   let ball = Ball.createdBall(state.data)
-   state.data.ballSize = ball.ballSize
-   state.data.balls.push(ball.ballPos) */
-
-    // < ---------------> //
 
     // movimentação da barra MANUAL
     
@@ -65,6 +23,8 @@ function run(dataState) {
         let code = document.querySelector('#right')
         code.innerHTML = JSON.stringify(s)
     }
+
+    let t = 0
 
     const time = setInterval(() => {
 
@@ -81,8 +41,12 @@ function run(dataState) {
         //state.data.balls[0] = Ball.moveBall(state.data, phyMod.toMove)
 
         GAME_SPEED+=1
-        Phy()
-        render(state.data, 0)
+        state.init()
+        render(state.data)
+        t++
+        if(t >= 500) {
+            window.GAME_RUN = false
+        }
     }, 1000 / state.data.config.fps)
 }
 

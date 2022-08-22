@@ -1,30 +1,29 @@
-function render (state) {
+import { state } from './enginer.js'
+import ball from './render/renderBall.js'
 
-    const { frame, balls } = state
+function render () {
+
+    const data = state.getState()
+
+    const { frame, balls } = data
 
                 let code = document.querySelector('#right')
-                code.innerHTML = JSON.stringify(state, null, 1)
+                code.innerHTML = JSON.stringify(data, null, 1)
 
-    let canvasSize = state.config.boxSize
+    let canvasSize = data.config.box.size
     frame.clearRect(0,0,canvasSize, canvasSize)
 
 
     // render bar
 
     frame.fillStyle = 'black'
-    frame.fillRect(state.bar.x[0], state.bar.y[0], state.barSize[0], state.barSize[1])
-
-    // render balls old
-
-    frame.beginPath();
-    frame.arc(state.balls[0].x, state.balls[0].y, state.ballSize, 0, Math.PI*2);
-    frame.fill();
+    frame.fillRect(data.bar.x[0], data.bar.y[0], data.barSize[0], data.barSize[1])
 
     // new render ball
 
-    frame.beginPath();
-    frame.arc(balls[0].ballPosition.x, balls[0].ballPosition.y, balls[0].ballSize, 0, Math.PI*2);
-    frame.fill();
+    
+
+    ball()
     
     //statistics
     setTimeout(() => {

@@ -1,9 +1,8 @@
-window.log = (ct) => console.log(ct)
 
 import { run, state } from './enginer.js'
 function Game(config) {
 
-    const { boxSize, barMove } = config
+    const { box, barMove } = config
 
     /*  a função "init" no final do código controla os dados iniciais
         e desenhos a serem feitos antes da partida se iniciar */
@@ -11,12 +10,13 @@ function Game(config) {
     function init(config) {
         const canvas = document.querySelector('#game')
     
-            canvas.width = config.boxSize
-            canvas.height = config.boxSize
+            canvas.width = config.box.size
+            canvas.height = config.box.size
     
         const ctx = canvas.getContext('2d')
 
         let { barSize, barMove, barArea } = preRender(ctx)
+        let ballSize = 15
 
         const stateConfig = {
             config, frame: ctx,
@@ -25,13 +25,21 @@ function Game(config) {
             },
             balls: [
                 {   
-                    ballPosition: { x: 20, y: 0 },
-                    ballSize: 20
+                    _id: 'ball-01',
+                    ballPosition: { x: 0, y: 0, w: ballSize, h: ballSize},
+                    ballSize,
+                    direction: { x: 0, y: 1}
+                },
+                {
+                    _id: 'ball-02',
+                    ballPosition: { x: 140, y: 0, w: ballSize, h: ballSize},
+                    ballSize,
+                    direction: { x: 0, y: -1}
                 }
             ],
             ballsN: 1,
             ball: [],
-            ballSize: 0,
+            ballSize,
 
 
             barSize,
@@ -39,7 +47,7 @@ function Game(config) {
             bar: barArea,
 
 
-            direction: 0
+            direction: 1
         }
 
         run(stateConfig)
@@ -48,10 +56,10 @@ function Game(config) {
     // renderização de objetos da tela inicial do game
     function preRender(ctx) {
         const barSize = [70, 10]
-        const barPosInitial = [boxSize / 2 - barSize[0] / 2, boxSize * 0.92]
+        const barPosInitial = [box.size / 2 - barSize[0] / 2, box.size * 0.92]
         const barArea = {
             x: [barPosInitial[0], barPosInitial[0]+barSize[0]],
-            y: [boxSize - barSize[1] * 2, boxSize - barSize[1]]
+            y: [box.size - barSize[1] * 2, box.size - barSize[1]]
         }
 
         config.barArea = barArea
@@ -68,8 +76,17 @@ function Game(config) {
 
 // chama função responsavel por criar o game, repasse os parametros necessário
 // box-size: tamanho do display em pixels
+const size = 300
 const game = Game({
-    boxSize: 300,
+    box: {
+        size: 300,
+        position: {
+            x: 0, y: 0, w: size, h: size,
+        },
+        size2d: {
+            x: size, y: size
+        }
+    },
     barMove: 20,
     fps: 45
 })
