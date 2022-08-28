@@ -1,6 +1,6 @@
 import { state } from '../enginer.js'
 
-const colArea = () => {
+const boxColl = () => {
     const { balls, frame } = state.getState()    
 
     for(let ball of balls) {
@@ -13,7 +13,9 @@ const colArea = () => {
     }
 }
 
-export default function() {
+export default function(box) {
+
+    if(box) boxColl()
 
     const { balls, frame } = state.getState()
 
@@ -27,6 +29,4 @@ export default function() {
         );
         frame.fill();
     }
-
-    colArea()
 }

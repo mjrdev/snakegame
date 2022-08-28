@@ -1,29 +1,28 @@
-import { state } from './enginer.js'
-import ball from './render/renderBall.js'
+import { state } from '../enginer.js'
+import ball from './renderBall.js'
+import bar from './renderBar.js'
 
 function render () {
 
     const data = state.getState()
 
-    const { frame, balls } = data
+    const st = {
+        balls: data.balls,
+        bar: data.bar
+    }
+    //document.getElementById("right").innerHTML = JSON.stringify(st, null, 2)
 
-                let code = document.querySelector('#right')
-                code.innerHTML = JSON.stringify(data, null, 1)
+    const { frame, balls } = data
 
     let canvasSize = data.config.box.size
     frame.clearRect(0,0,canvasSize, canvasSize)
 
-
+    const boxCollision = true
     // render bar
-
-    frame.fillStyle = 'black'
-    frame.fillRect(data.bar.x[0], data.bar.y[0], data.barSize[0], data.barSize[1])
+    bar(boxCollision)
 
     // new render ball
-
-    
-
-    ball()
+    ball(boxCollision)
     
     //statistics
     setTimeout(() => {

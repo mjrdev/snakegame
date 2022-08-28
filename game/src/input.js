@@ -1,5 +1,5 @@
 import { state } from '../enginer.js'
-import render from '../render.js'
+import render from '../render/index.js'
 
 import inputTypes from './inputTypes.json' assert {type: 'json'};
 
@@ -14,7 +14,7 @@ function input(elementToUpdate, type) {
     const elements = { bar, dif }
 
     if(inputTypes[type] === undefined) {
-        console.log('no')
+        console.log('no keys')
     } else {
         elements[elementToUpdate][inputTypes[type]](data)
     }
@@ -22,36 +22,30 @@ function input(elementToUpdate, type) {
 
 const bar = {
     moveLeft: function(data) {
-        let databar = data.bar
+        const bar = data.bar
 
-        const modify = {
-            bar: {
-                x: [
-                    databar.x[0] - sizes.barMoveSize, databar.x[1] - sizes.barMoveSize
-                ],
-                y: [
-                    databar.y[0], databar.y[1]
-                ]
-            }
+        bar.position = {
+            x: bar.position.x - sizes.barMoveSize,
+            x2: bar.position.x2 - sizes.barMoveSize,
+            y: bar.position.y,
+            y2: bar.position.y2
         }
 
-        state.update(modify)
+        state.update(bar)
     },
     moveRight: function(data) {
-        let databar = data.bar
+        let bar = data.bar
 
-        const modify = {
-            bar: {
-                x: [
-                    databar.x[0] + sizes.barMoveSize, databar.x[1] + sizes.barMoveSize
-                ],
-                y: [
-                    databar.y[0], databar.y[1]
-                ]
-            }
+        
+
+        bar.position = {
+            x: bar.position.x + sizes.barMoveSize,
+            x2: bar.position.x2 + sizes.barMoveSize,
+            y: bar.position.y,
+            y2: bar.position.y2
         }
 
-        state.update(modify)
+        state.update(bar)
     }
 }
 

@@ -17,19 +17,20 @@ function moveBall() {
 
     for(let ball of balls) {
 
-        let ballx = ball.ballPosition.x
-        let bally = ball.ballPosition.y + 5 * data.direction
+        let ballx = ball.ballPosition.x + (7 + ball.mass) * ball.direction.x
+        let bally = ball.ballPosition.y + (2 + ball.mass) * ball.direction.y
 
         config.balls.push({
             _id: 'ball',
-            ballSize: 20,
+            ballSize: ball.ballSize,
             ballPosition: {
                 x: ballx, y: bally,
                 w: ballx + ball.ballSize, h: bally + ball.ballSize
             },
             direction: {
                 x: ball.direction.x, y: ball.direction.y
-            }
+            },
+            mass: ball.mass 
         })
     }
 

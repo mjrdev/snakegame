@@ -1,4 +1,4 @@
-import render from './render.js'
+import render from './render/index.js'
 import Phy from './physical/physical.js'
 import input from './src/input.js'
 
@@ -19,11 +19,6 @@ function run(dataState) {
         input('bar', event.key)
     })
 
-    function statistics(s) {
-        let code = document.querySelector('#right')
-        code.innerHTML = JSON.stringify(s)
-    }
-
     let t = 0
 
     const time = setInterval(() => {
@@ -31,8 +26,6 @@ function run(dataState) {
         if(!window.GAME_RUN) {
             clearInterval(time)
         }
-
-        statistics(state.data)
         
 
         // atualização ball
@@ -43,8 +36,9 @@ function run(dataState) {
         GAME_SPEED+=1
         state.init()
         render(state.data)
+
         t++
-        if(t >= 500) {
+        if(t >= 5000) {
             window.GAME_RUN = false
         }
     }, 1000 / state.data.config.fps)

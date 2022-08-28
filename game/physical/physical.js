@@ -9,6 +9,7 @@ function Phy() {
     const data = state.getState()
 
     const observerToRun = [balls.moveBall]
+    
     const props = {
         observers: observerToRun,
         blocks: [],

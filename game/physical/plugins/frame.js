@@ -4,41 +4,57 @@ export default function (props) {
     const data = state.getState()
     const block = data.config.box
     const entitiesKeys = props.entities
+    
+    const balls = data.balls
 
-    const ball = data.balls[0]
+    for(let ball of balls) {
 
-    const entities = [ball]
+        const blocked = {
+            up: block.position['y2'],
+            down: block.position['y'],
+            right: block.position['x'],
+            left: block.position['x2']
+        }
 
-    const expre = ball.ballPosition.y + 15 >= block.size
-    const expre2 = ball.ballPosition.y - 15 <= block.size - block.size
+        const expBalls = {
+            up: ball.ballPosition['h'] > blocked.up - ball.ballSize,
+            down: ball.ballPosition['y'] < blocked.down,
+            right: ball.ballPosition['x'] < blocked.right,
+            left: ball.ballPosition['w'] > blocked.left - ball.ballSize
+        }
 
-    const expres = {
-        collision: ball.ballPosition.y + 15 > block.size,
-        collision:ball.ballPosition.y - 15 < block.size - block.size, 
-    }
+        if(expBalls.up) {
 
-    const expr = () => {
-        for(let entity of entities) {
-            
+            ball.direction.y = -1
+            state.update({ balls })
+        }
+        if(expBalls.down) {
+
+            ball.direction.y = 1
+            state.update({ balls })
+        }
+
+        if(expBalls.right) {
+
+            ball.direction.x = 1
+            state.update({ balls })
+        }
+
+        if(expBalls.left) {
+
+            ball.direction.x = -1
+            state.update({ balls })
         }
     }
 
-    function ident() {
+    /*
+    const bar = data.bar
 
-        for(let i in ball.ballPosition) {
 
-            if(ball.ballPosition['y'] < block.position['y']) {
-                state.update({ direction: 1 })
-            }
-
-            if(ball.ballPosition['h'] > block.position['h'] - ball.ballSize) {
-
-                state.update({ direction: -1 })
-            }
-        }
-        return 
+    if(bar.position.x <= block.position.x) {
+        console.log('passou')
     }
-
-    //console.log(ident());
-    ident()
+    if(bar.position.x2 >= block.position.x2) {
+        console.log('toque right')
+    } */
 }
