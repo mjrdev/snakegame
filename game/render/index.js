@@ -17,21 +17,12 @@ function render () {
     let canvasSize = data.config.box.size
     frame.clearRect(0,0,canvasSize, canvasSize)
 
-    const boxCollision = true
+    const boxCollision = false
     // render bar
     bar(boxCollision)
 
     // new render ball
     ball(boxCollision)
-    
-    //statistics
-    setTimeout(() => {
-        let icon = document.querySelector('#icon')
-        icon.style.backgroundColor = 'green'
-    }, 100)
-
-    let icon = document.querySelector('#icon')
-    icon.style.backgroundColor = 'white'
 }
 
 export default render

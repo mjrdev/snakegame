@@ -1,8 +1,10 @@
-## Push ball - 2dgame
+<h2 align="center">Collision Game 2D</h2>
+
+Acesse o game aqui["https://mjrdev.github.io/GameCollision-2DGAME/game/"]
 
 Esse game está em beta e incompleto, muitos _bugs_ serão encontrados.
 
-é necessário ter o node instalado
+é necessário ter o Nodejs instalado
 
 após clonado:
 
@@ -10,26 +12,10 @@ após clonado:
 ```
 $ npm install
 $ npm run start
-
 ```
 or
-
 ```
 $ yarn
 $ yarn start
-
-```
-
-#### to run in development mode:
-```
-$ npm install
-$ npm run dev
-
-```
-or
-
-```
-$ yarn
-$ yarn dev
 
 ```
