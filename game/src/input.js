@@ -1,4 +1,4 @@
-import { state } from '../enginer.js'
+import { state } from '../engine.js'
 import render from '../render/index.js'
 
 import inputTypes from './inputTypes.json' assert {type: 'json'};

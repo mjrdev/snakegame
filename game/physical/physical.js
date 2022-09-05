@@ -1,4 +1,4 @@
-import { state } from '../enginer.js'
+import { state } from '../engine.js'
 import balls from '../src/balls.js'
 
 // plugins
